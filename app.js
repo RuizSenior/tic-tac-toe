@@ -5,10 +5,19 @@ const boardContainer = document.getElementById("board");
 let currentPlayer = "X";
 let gameActive = true;
 const statusDisplay = document.getElementById("status");
-const winningMessage = () => `Player ${currentPlayer} has won!`;
+const winningMessage = () => `Player ${currentPlayer} has won! 🥳`;
 const drawMessage = () => `Game ended in a draw!`;
 const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
+
 statusDisplay.innerHTML = currentPlayerTurn();
+
+document.getElementById("btn").addEventListener("click", () => {
+  board.fill("");
+  currentPlayer = "X";
+  gameActive = true;
+  statusDisplay.innerHTML = currentPlayerTurn();
+  drawBoard();
+})
 
 const winningConditions = [
   [0, 1, 2],     
@@ -27,6 +36,8 @@ function drawBoard() {
     const cellElement = document.createElement("div");
     cellElement.classList.add("cell");
     cellElement.innerHTML = cell;
+    cellElement.setAttribute("data-cell-index", index);
+
     cellElement.addEventListener("click", () => handleCellClick(index))
     boardContainer.appendChild(cellElement);
   });
@@ -38,38 +49,39 @@ function handleCellClick(index) {
   }
   board[index] = currentPlayer;
 
-  drawBoard();
+  const cellElement = document.querySelector(`[data-cell-index='${index}']`);
+  cellElement.innerHTML = currentPlayer;
+  cellElement.classList.add(currentPlayer === "X" ? "cross" : "circle");
   checkResult();
-  
 }
 
 function checkResult() {
-  let roundWon = false;
   for (let condition of winningConditions) {
     const [a, b, c] = condition;
     if (board[a] === "" || board[b] === "" || board[c] === "") {
       continue;
     }
     if (board[a] === board[b] && board[a] === board[c]) {
-      roundWon = true;
-      break;
-    }
-  }
+  
+      [a, b, c].forEach(index => {
+        const cellElement = document.querySelector(`[data-cell-index='${index}']`);
+        cellElement.classList.add("winner");
+      });
 
-  if (roundWon) {
-    statusDisplay.innerHTML = winningMessage();
-    gameActive = false;
-    return;
+      statusDisplay.innerHTML = winningMessage();
+      gameActive = false;
+      return;
+    }
   }
 
   if (!board.includes("")) {
     statusDisplay.innerHTML = drawMessage();
     gameActive = false;
-    return;
+  } else {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    statusDisplay.innerHTML = currentPlayerTurn();
   }
-
-  currentPlayer = currentPlayer === "X" ? "O" : "X";
-  statusDisplay.innerHTML = currentPlayerTurn();
 }
+
 
 drawBoard();

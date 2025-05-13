@@ -1,10 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-image: linear-gradient(to bottom right, #3e6283, #050e18);
+  color: white;
+  margin: 0;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 20px;
+  color: white;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
+  justify-content: center;
   height: 100vh;
-  margin-top: 50px;
+  
 }
 
 .board {
@@ -18,10 +34,51 @@
   width: 100px;
   height: 100px;
   background: #eee;
-  font-size: 2rem;
+  font-size: 3rem;
+  font-weight: bold;;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border: 1px solid #ccc;
+}
+
+.circle {
+  color: red;
+}
+
+.cross {
+  color: blue;
+}
+.cell:hover {
+  background: #ddd;
+}
+
+.status {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.restart {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: white;
+  color: #333;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.restart:hover {
+  background-color: #f0f0f0;
+}
+.restart:active {
+  background-color: #b9b9b9;
+}
+
+.winner {
+  background-color: #90ee90; 
+
 }
