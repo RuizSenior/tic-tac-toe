@@ -33,7 +33,7 @@ body {
 .cell {
   width: 100px;
   height: 100px;
-  background: #eee;
+  background: white;
   font-size: 3rem;
   font-weight: bold;;
   display: flex;
@@ -41,6 +41,7 @@ body {
   justify-content: center;
   cursor: pointer;
   border: 1px solid #ccc;
+  border-radius: 10%;
 }
 
 .circle {
@@ -50,9 +51,7 @@ body {
 .cross {
   color: blue;
 }
-.cell:hover {
-  background: #ddd;
-}
+
 
 .status {
   margin-top: 20px;
@@ -62,23 +61,41 @@ body {
 
 .restart {
   margin-top: 20px;
-  padding: 10px 20px;
+  padding: 10px ;
   font-size: 1rem;
-  background-color: white;
-  color: #333;
-  border: none;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .restart:hover {
-  background-color: #f0f0f0;
+  background-color: white;
+  color: black;
 }
-.restart:active {
-  background-color: #b9b9b9;
-}
+
 
 .winner {
   background-color: #90ee90; 
 
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.2;
+  }
+  70% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.cell.pop {
+  animation: pop 0.3s;
 }

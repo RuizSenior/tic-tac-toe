@@ -52,6 +52,10 @@ function handleCellClick(index) {
   const cellElement = document.querySelector(`[data-cell-index='${index}']`);
   cellElement.innerHTML = currentPlayer;
   cellElement.classList.add(currentPlayer === "X" ? "cross" : "circle");
+
+  cellElement.classList.add("pop");
+  setTimeout(() => cellElement.classList.remove("pop"), 300);
+
   checkResult();
 }
 
